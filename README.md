@@ -6,18 +6,18 @@ Run :
 
 Commands (case ignored):
 
-*ASM file
+* ASM file
  
         Compile assembler program file and load code into memory
 
-*LOAD code[ code...]
+* LOAD code[ code...]
  
         Load code into memory, code separated by space
 
-*RUN
+* RUN
  
         Run code from memory
 
-*DUMP
+* DUMP
 
         Dump computer memory to output
