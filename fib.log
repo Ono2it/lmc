@@ -1,0 +1,79 @@
+awk -f lmc.awk
+asm fib.lma
+00: #Print fibonacci numbers
+00:     LDA ONE         #Load init values
+01:     STA FIB1        #First number
+02:     STA FIB2        #Second number
+03:     OUT             #Print first
+04:     OUT             #Print second
+05: LOOP        LDA MAX         #ACC=MAX
+06:     SUB FIB1        #ACC=ACC-FIB1
+07:     SUB FIB2        #ACC=ACC-FIB2
+08:     BRP CONT        #ACC positive ? Continue
+09:     BRA END         #Negative : goto end of program
+10: CONT        LDA FIB1        #ACC=FIB1
+11:     ADD FIB2        #ACC=ACC+FIB2
+12:     STA FIBN        #Store FIBN - next number
+13:     OUT             #Print it
+14:     LDA FIB2        #FIB1=FIB2
+15:     STA FIB1
+16:     LDA FIBN        #FIB2=FIBN
+17:     STA FIB2
+18:     BRA LOOP        #Next LOOP
+19: END HLT
+20: ONE DAT 1           #Init value
+21: FIB1        DAT             #First fib number
+22: FIB2        DAT             #Second fib number
+23: FIBN        DAT             #Next fib number
+24: MAX DAT 999         #Max computer number
+
+Labels:
+LOOP    05
+MAX     24
+FIB1    21
+FIB2    22
+FIBN    23
+ONE     20
+END     19
+CONT    10
+
+Xrefs:
+LOOP    18
+MAX     5
+FIB1    1 6 10 15
+FIB2    2 7 11 14 17
+FIBN    12 16
+ONE     0
+END     9
+CONT    8
+
+LOAD 520 321 322 902 902 524 221 222 810 619 521 122 323 902 522 321 523 322 605
+ 0 1 0 0 0 999
+dump
+00: 520 321 322 902 902 524 221 222 810 619
+10: 521 122 323 902 522 321 523 322 605   0
+20:   1   0   0   0 999   0   0   0   0   0
+30:   0   0   0   0   0   0   0   0   0   0
+40:   0   0   0   0   0   0   0   0   0   0
+50:   0   0   0   0   0   0   0   0   0   0
+60:   0   0   0   0   0   0   0   0   0   0
+70:   0   0   0   0   0   0   0   0   0   0
+80:   0   0   0   0   0   0   0   0   0   0
+90:   0   0   0   0   0   0   0   0   0   0
+run
+OUT:1
+OUT:1
+OUT:2
+OUT:3
+OUT:5
+OUT:8
+OUT:13
+OUT:21
+OUT:34
+OUT:55
+OUT:89
+OUT:144
+OUT:233
+OUT:377
+OUT:610
+OUT:987

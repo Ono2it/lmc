@@ -1,0 +1,26 @@
+#Print fibonacci numbers
+	LDA ONE		#Load init values
+	STA FIB1	#First number
+	STA FIB2	#Second number
+	OUT		#Print first
+	OUT		#Print second
+LOOP	LDA MAX		#ACC=MAX
+	SUB FIB1	#ACC=ACC-FIB1
+	SUB FIB2	#ACC=ACC-FIB2
+	BRP CONT	#ACC positive ? Continue
+	BRA END		#Negative : goto end of program
+CONT	LDA FIB1	#ACC=FIB1
+	ADD FIB2	#ACC=ACC+FIB2
+	STA FIBN 	#Store FIBN - next number
+	OUT		#Print it
+	LDA FIB2	#FIB1=FIB2
+	STA FIB1
+	LDA FIBN	#FIB2=FIBN
+	STA FIB2
+	BRA LOOP	#Next LOOP
+END	HLT
+ONE	DAT 1		#Init value
+FIB1	DAT 		#First fib number
+FIB2 	DAT 		#Second fib number
+FIBN	DAT		#Next fib number
+MAX	DAT 999 	#Max computer number
